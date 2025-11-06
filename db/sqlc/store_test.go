@@ -10,6 +10,9 @@ import (
 func TestTransferTx(t *testing.T) {
 	store := NewStore(testDB)
 
+	require.NotNil(t, testDB, "testDB is nil")
+	require.NotNil(t, store, "store is nil")
+
 	account1 := createRandomAccount(t)
 	account2 := createRandomAccount(t)
 
@@ -34,10 +37,10 @@ func TestTransferTx(t *testing.T) {
 
 	// check results
 	for i := 0; i < n; i++ {
-		err := <- errs
+		err := <-errs
 		require.NoError(t, err)
 
-		result := <- results
+		result := <-results
 		require.NotEmpty(t, result)
 
 		// check transfer
@@ -63,14 +66,14 @@ func TestTransferTx(t *testing.T) {
 		_,err = store.GetEntry(context.Background(), fromEntry.ID)
 		require.NoError(t, err)
 
-		ToEntry := result.ToEntry
-		require.NotEmpty(t, ToEntry)
-		require.Equal(t, account2.ID, ToEntry.AccountID)
-		require.Equal(t, -amount, ToEntry.Amount)
-		require.NotZero(t, ToEntry.ID)
-		require.NotZero(t, ToEntry.CreatedAt)
+		toEntry := result.ToEntry
+		require.NotEmpty(t, toEntry)
+		require.Equal(t, account2.ID, toEntry.AccountID)
+		require.Equal(t, amount, toEntry.Amount)
+		require.NotZero(t, toEntry.ID)
+		require.NotZero(t, toEntry.CreatedAt)
 
-		_,err = store.GetEntry(context.Background(), ToEntry.ID)
+		_,err = store.GetEntry(context.Background(), toEntry.ID)
 		require.NoError(t, err)
 
 		// TODO:check accounts' balance
