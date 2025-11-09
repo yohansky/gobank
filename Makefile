@@ -1,4 +1,4 @@
-SHELL=cmd.exe
+SHELL=/bin/bash
 
 up:
 	@echo Starting Docker images...
