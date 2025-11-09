@@ -23,5 +23,3 @@ sqlc:
 test:
 	go test -v -cover ./...
 	@echo Done!
-
-# .PHONY: 
