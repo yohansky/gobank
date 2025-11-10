@@ -23,3 +23,6 @@ sqlc:
 test:
 	go test -v -cover ./...
 	@echo Done!
+
+server:
+	go run main.go
