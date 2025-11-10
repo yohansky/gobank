@@ -25,4 +25,9 @@ test:
 	@echo Done!
 
 server:
+	@echo Initializing Server
 	go run main.go
+
+mock:
+	@echo Generate mock file
+	mockgen -package mockdb -destination db/mock/store.go gobank/db/sqlc Store
