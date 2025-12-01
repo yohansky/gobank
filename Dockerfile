@@ -1,12 +1,23 @@
-FROM golang:1.22.6
-
+# Build stage
+FROM golang:1.24-alpine AS builder
 WORKDIR /app
-
-RUN go install github.com/air-verse/air@latest
-
-COPY go.mod go.sum ./
-RUN go mod download
-
 COPY . .
+RUN go build -o main main.go
 
-CMD ["air","-c",".air.toml"]
+# Run stage
+FROM alpine
+WORKDIR /app
+COPY --from=builder /app/main .
+COPY app.env .
+
+EXPOSE 8080
+CMD ["/app/main"]
+
+# RUN go install github.com/air-verse/air@latest
+
+# COPY go.mod go.sum ./
+# RUN go mod download
+
+# COPY . .
+
+# CMD ["air","-c",".air.toml"]
