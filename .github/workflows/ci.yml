@@ -42,6 +42,16 @@ jobs:
           sudo mv migrate /usr/local/bin/
           which migrate
 
+      - name: Debug cek folder migrate
+      - run: |
+          echo "Cek folder di root project:"
+          ls -lah
+
+          echo "Cek folder migration:"
+          ls -lah migrate || true
+          ls -lah migration
+          ls -lah database/migration || true
+
       - name: Run migrations
         run: make migrateup
 
