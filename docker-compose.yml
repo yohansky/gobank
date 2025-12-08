@@ -14,7 +14,7 @@ services:
     ports:
       - '8080:8080'
     environment:
-      - DB_SOURCE=postgresql://root:secret@db:5432/postgres?sslmode=disable
+      - DB_SOURCE=postgresql://root:secret@db:5432/gobank?sslmode=disable
     depends_on:
       - db
     entrypoint: ['/app/wait-for.sh', 'db:5432', '--', '/app/start.sh']

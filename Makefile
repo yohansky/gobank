@@ -2,7 +2,7 @@ SHELL=/bin/bash
 
 up:
 	@echo Starting Docker images...
-	docker-compose up -d
+	docker-compose up --build
 	@echo Docker images started!
 
 down:
