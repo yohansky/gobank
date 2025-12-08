@@ -37,3 +37,15 @@ server:
 mock:
 	@echo Generate mock file
 	mockgen -package mockdb -destination db/mock/store.go gobank/db/sqlc Store
+
+proto:
+	@echo remove Existing Proto file
+	rm -f pb/*.go
+	@echo Generating proto
+	protoc \
+	-I="/c/aplikasi/protoc-3.20.0-win64/include" \
+	--proto_path=proto --go_out=pb --go_opt=paths=source_relative \
+	--go-grpc_out=pb --go-grpc_opt=paths=source_relative \
+	proto/*.proto
+
+.PHONY: proto

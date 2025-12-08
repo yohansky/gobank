@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package pb;
+
+// by default impot mencari di struktur folder,jadi kalau merah tidak apa apa, selagi masih bisa di generate
+import "rpc_create_user.proto";
+import "rpc_login_user.proto";
+
+option go_package = "gobank/pb";
+
+service GoBank {
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {}
+    rpc LoginUser (LoginUserRequest) returns (LoginUserResponse) {}
+}
