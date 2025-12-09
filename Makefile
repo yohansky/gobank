@@ -48,4 +48,8 @@ proto:
 	--go-grpc_out=pb --go-grpc_opt=paths=source_relative \
 	proto/*.proto
 
-.PHONY: proto
+evans:
+	@echo running evans CLI
+	evans --host localhost --port 9090 -r repl
+
+.PHONY: proto evans
